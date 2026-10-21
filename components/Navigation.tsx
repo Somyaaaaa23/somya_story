@@ -1,39 +1,28 @@
 "use client";
 
-import { ArrowDownRight, Compass, FileText, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useState } from "react";
 
-type NavigationProps = {
-  onOpenRecruiter: () => void;
-  onExplore: () => void;
-};
+type NavigationProps = { onOpenRecruiter: () => void };
 
-export function Navigation({ onOpenRecruiter, onExplore }: NavigationProps) {
+export function Navigation({ onOpenRecruiter }: NavigationProps) {
   const [menuOpen, setMenuOpen] = useState(false);
-
-  const handleExplore = () => {
-    setMenuOpen(false);
-    onExplore();
-  };
-
-  const handleRecruiter = () => {
-    setMenuOpen(false);
-    onOpenRecruiter();
-  };
+  const close = () => setMenuOpen(false);
 
   return (
     <header className="site-nav" aria-label="Main navigation">
-      <a className="brand-mark" href="#home" aria-label="Somya Upadhyay, home">
-        <span className="brand-stamp">S<span>✳</span></span>
+      <a className="brand" href="#home" aria-label="Somya Upadhyay, home">
+        <span className="brand-stamp">S</span>
         <span className="brand-name">somya upadhyay <small>FIELD NOTES / 2026</small></span>
       </a>
       <nav className={`nav-links ${menuOpen ? "nav-links-open" : ""}`} aria-label="Portfolio links">
-        <button className="nav-link" onClick={handleExplore}><Compass size={15} /> Explore the world</button>
-        <button className="nav-link" onClick={handleRecruiter}><FileText size={15} /> Recruiter view</button>
-        <a className="nav-cta" href="#contact" onClick={() => setMenuOpen(false)}>Say hello <ArrowDownRight size={15} /></a>
+        <a className="nav-link" href="#offering" onClick={close}>What I do</a>
+        <a className="nav-link" href="#projects" onClick={close}>Projects</a>
+        <button type="button" className="nav-link" onClick={() => { close(); onOpenRecruiter(); }}>Recruiter view</button>
+        <a className="nav-cta" href="#contact" onClick={close}>Say hello</a>
       </nav>
-      <button className="mobile-menu" aria-label={menuOpen ? "Close navigation" : "Open navigation"} aria-expanded={menuOpen} onClick={() => setMenuOpen((open) => !open)}>
-        {menuOpen ? <X size={21} /> : <Menu size={21} />}
+      <button type="button" className="mobile-menu" aria-label={menuOpen ? "Close navigation" : "Open navigation"} aria-expanded={menuOpen} onClick={() => setMenuOpen((open) => !open)}>
+        {menuOpen ? <X size={22} /> : <Menu size={22} />}
       </button>
     </header>
   );

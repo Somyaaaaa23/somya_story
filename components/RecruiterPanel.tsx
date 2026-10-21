@@ -20,10 +20,10 @@ export function RecruiterPanel({ open, onClose }: RecruiterPanelProps) {
           <p className="recruiter-role">{recruiterSnapshot.role}</p>
           <p className="panel-detail">{recruiterSnapshot.summary}</p>
           <div className="strength-grid">{recruiterSnapshot.strengths.map((strength, i) => <div key={strength}><span>0{i + 1}</span>{strength}</div>)}</div>
-          <div className="recruiter-note">{recruiterSnapshot.note}</div>
+          <div className="recruiter-note"><mark>{recruiterSnapshot.note}</mark></div>
           <div className="panel-actions recruiter-actions">
-            <a className="button-primary" href="#contact" onClick={onClose}>Contact me <ArrowDownRight size={17} /></a>
-            <a className="button-quiet" href={contact.resume} target="_blank" rel="noreferrer"><Download size={16} /> Résumé PDF</a>
+            <a className="btn btn-ink" href="#contact" onClick={onClose}>Contact me <ArrowDownRight size={17} /></a>
+            <a className="btn btn-outline" href={contact.resume} target="_blank" rel="noreferrer"><Download size={16} /> Résumé PDF</a>
           </div>
           <div className="social-row">
             <a href={`mailto:${contact.email}`}><Mail size={16} /> {contact.email}</a>

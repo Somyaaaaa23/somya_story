@@ -1,23 +1,4 @@
-import type { LucideIcon } from "lucide-react";
-import { BookOpen, Briefcase, Code2, FlaskConical, Trophy, Users } from "lucide-react";
-
-export type WorldId = "projects" | "experience" | "research" | "wins" | "leadership" | "toolbox";
-
 export type ExternalLink = { label: string; href: string };
-
-export type WorldNode = {
-  id: WorldId;
-  eyebrow: string;
-  title: string;
-  short: string;
-  detail: string;
-  color: string;
-  position: string;
-  icon: LucideIcon;
-  facts: string[];
-  actionLabel: string;
-  links?: ExternalLink[];
-};
 
 export const contact = {
   email: "usomya23@gmail.com",
@@ -27,69 +8,77 @@ export const contact = {
   resume: "/Somya-Upadhyay-Resume.pdf",
 };
 
-export const worldNodes: WorldNode[] = [
-  {
-    id: "projects",
-    eyebrow: "THE BUILDER'S CORNER",
-    title: "Things I've made",
-    short: "Products, prototypes & systems",
-    detail: "I like taking a messy, real-world problem and turning it into something people can use. This corner is for the products and engineering experiments behind that instinct.",
-    color: "persimmon",
-    position: "node-projects",
-    icon: Code2,
-    facts: [
-      "GraphSentinel · real-time banking fraud detection with Temporal GNNs (EvolveGCN) and LSTM autoencoders: 0.89 F1, 94% fewer false positives than threshold-based AML rules",
-      "PharmaDrishti · pharma supply-chain intelligence combining XGBoost with knowledge-graph features and SHAP explainability: R² 0.89, finalist at SAP MBA Hackfest",
-      "SaviHer · women-safety product",
-    ],
-    actionLabel: "Ask me about a project",
-    links: [
-      { label: "GraphSentinel on GitHub", href: "https://github.com/Somyaaaaa23/graph-sentinel-banks" },
-      { label: "PharmaDrishti on GitHub", href: "https://github.com/Somyaaaaa23/PharmaDrishti" },
-    ],
-  },
+export type Offering = {
+  id: string;
+  tab: string;
+  color: string;
+  ink: string;
+  // Where the tab sits along its folder edge: 0 = far left, 1 = far right.
+  pos: number;
+  eyebrow: string;
+  title: string;
+  line: string;
+  facts: string[];
+  links?: ExternalLink[];
+};
+
+export const offerings: Offering[] = [
   {
     id: "experience",
+    tab: "WORK EXPERIENCE",
+    color: "#C4BD55",
+    ink: "#1B1A0F",
+    pos: 0.06,
     eyebrow: "WHERE IT GOT REAL",
     title: "Work experience",
-    short: "Software Developer Intern · Daanik",
-    detail: "My internship was the first time I owned a product from the first idea to the working build: writing the docs, designing the system, and shipping it.",
-    color: "plum",
-    position: "node-experience",
-    icon: Briefcase,
+    line: "my first time owning a product end to end",
     facts: [
       "Software Developer Intern · Daanik Eduventures · May–July 2026",
       "Led BHAO end to end, a 2D gamified financial-literacy platform for 15 to 35 year olds",
       "Combined ML models with rules-based logic to drive 30+ financial scenarios across 200+ unique cards",
       "React · TypeScript · FastAPI · PostgreSQL · ML",
     ],
-    actionLabel: "Ask me about the internship",
+  },
+  {
+    id: "projects",
+    tab: "THINGS I’VE MADE",
+    color: "#C6A0B1",
+    ink: "#1E1418",
+    pos: 0.74,
+    eyebrow: "THE BUILDER’S CORNER",
+    title: "Things I’ve made",
+    line: "messy real problems, turned into something usable",
+    facts: [
+      "GraphSentinel · real-time AML fraud detection with Temporal GNNs, 0.89 F1",
+      "PharmaDrishti · pharma supply-chain intelligence with XGBoost and knowledge graphs, R² 0.89",
+      "SaviHer · women-safety product",
+    ],
+    links: [{ label: "Open the project drawer", href: "#projects" }],
   },
   {
     id: "research",
+    tab: "RESEARCH NOTES",
+    color: "#F0CDD4",
+    ink: "#2A1519",
+    pos: 0.26,
     eyebrow: "QUESTIONS WORTH CHASING",
     title: "Research notes",
-    short: "Two accepted papers · AI/ML",
-    detail: "Research gives me a reason to ask why a model works, what its output means, and how to make its decisions easier to understand.",
-    color: "cobalt",
-    position: "node-research",
-    icon: BookOpen,
+    line: "asking why a model works, not just whether",
     facts: [
       "“Explainable Drug Adoption Forecasting using Knowledge Graphs” · accepted at IDBA 2026 (Springer LAIS series)",
       "“The Idiographic Shift in Computational Psychiatry” · selected for presentation at ICBAI 2026, IIM Bangalore",
       "Interested in explainable ML, knowledge graphs and graph learning",
     ],
-    actionLabel: "Ask me about the research",
   },
   {
     id: "wins",
+    tab: "WINS & CHALLENGES",
+    color: "#8E2621",
+    ink: "#FFF4EE",
+    pos: 0.86,
     eyebrow: "THE HAPPY ACCIDENTS",
     title: "Wins & challenges",
-    short: "Hackathons, demos & deadlines",
-    detail: "Short deadlines have taught me to make trade-offs, communicate a clear idea, and keep moving when the first approach does not work.",
-    color: "butter",
-    position: "node-wins",
-    icon: Trophy,
+    line: "short deadlines, clear ideas, keep moving",
     facts: [
       "AI FOR BHARAT (PAN-IIT) · theme winner and ₹1,00,000 prize for SaanchaarSetu, middleware linking Karnataka's SWS to 40+ departments",
       "iDEA Hackathon 2.0 (Union Bank) · Top 40 of 1600+ teams with GraphSentinel",
@@ -97,34 +86,32 @@ export const worldNodes: WorldNode[] = [
       "SAP MBA Hackfest · finalist with PharmaDrishti",
       "LeetCode · 1622 contest rating, 370+ problems solved",
     ],
-    actionLabel: "Ask me about a hackathon",
     links: [{ label: "LeetCode profile", href: contact.leetcode }],
   },
   {
     id: "leadership",
+    tab: "BEYOND THE IDE",
+    color: "#F2D3A3",
+    ink: "#231A0C",
+    pos: 0.43,
     eyebrow: "PEOPLE ARE PART OF THE BUILD",
     title: "Beyond the IDE",
-    short: "Placements, sponsorships & teamwork",
-    detail: "Working as a Training & Placement Coordinator has given me a different view of technology careers: clear communication, follow-through, and making opportunities easier to reach matter too.",
-    color: "moss",
-    position: "node-leadership",
-    icon: Users,
+    line: "communication and follow-through matter too",
     facts: [
       "Training & Placement Coordinator (2026) · corporate outreach and industry partnerships to connect students with tech firms",
       "Battle of Bytes · Sponsorship Lead & Head Coordinator for the university's flagship coding competition",
       "Leading cross-functional teams from planning to event day",
     ],
-    actionLabel: "Ask me about the people side",
   },
   {
     id: "toolbox",
+    tab: "MY TOOLBOX",
+    color: "#B7B04A",
+    ink: "#1B1A0F",
+    pos: 0.11,
     eyebrow: "TOOLS ARE A MEANS, NOT THE STORY",
     title: "My toolbox",
-    short: "Software, data & experimentation",
-    detail: "I work across software development and applied machine learning. I enjoy learning a tool when it helps solve the problem in front of me, not just adding another name to a list.",
-    color: "paper",
-    position: "node-toolbox",
-    icon: FlaskConical,
+    line: "learned because a problem needed them",
     facts: [
       "Languages: Python, Java, C, SQL, Dart",
       "Product & backend: React, TypeScript, FastAPI, PostgreSQL, Flutter, Firebase",
@@ -132,8 +119,84 @@ export const worldNodes: WorldNode[] = [
       "Data & infra: Kafka, Flink, Neo4j, Docker, Kubernetes, GCP, n8n",
       "Foundations: data structures, algorithms, OOP",
     ],
-    actionLabel: "Ask me about my stack",
     links: [{ label: "GitHub profile", href: contact.github }],
+  },
+];
+
+export type ProjectScreen = { src: string; caption: string };
+
+export type Project = {
+  id: string;
+  no: string;
+  year: string;
+  script: string;
+  bold: string;
+  name: string;
+  tag: string;
+  about: string;
+  problem?: string;
+  stack: string[];
+  // Add screenshots under public/projects/ and list them here to show the "Screens" page.
+  screens: ProjectScreen[];
+  highlights: string[];
+  link?: string;
+};
+
+export const projects: Project[] = [
+  {
+    id: "saviher",
+    no: "01",
+    year: "2026",
+    script: "Savi",
+    bold: "HER",
+    name: "SaviHer",
+    tag: "Women-safety product",
+    about: "A women-safety product. The full write-up for this file is on its way.",
+    stack: [],
+    screens: [],
+    highlights: [],
+  },
+  {
+    id: "graphsentinel",
+    no: "02",
+    year: "2026",
+    script: "Graph",
+    bold: "SENTINEL",
+    name: "GraphSentinel",
+    tag: "AI-powered fraud detection",
+    about: "A real-time banking fraud detection system that catches multi-hop money-laundering patterns as they happen.",
+    problem: "Threshold-based AML rules flag too many innocent transactions and miss layered laundering across accounts.",
+    stack: ["PyTorch Geometric", "Neo4j", "Kafka", "Flink", "Docker", "Kubernetes"],
+    screens: [],
+    highlights: [
+      "Temporal GNNs (EvolveGCN) plus LSTM autoencoders",
+      "0.89 F1-score for fraud classification",
+      "94% fewer false positives than threshold-based AML rules",
+      "Top 40 of 1600+ teams at iDEA Hackathon 2.0",
+      "Now being extended with federated learning",
+    ],
+    link: "https://github.com/Somyaaaaa23/graph-sentinel-banks",
+  },
+  {
+    id: "pharmadrishti",
+    no: "03",
+    year: "2026",
+    script: "Pharma",
+    bold: "DRISHTI",
+    name: "PharmaDrishti",
+    tag: "Pharma supply-chain intelligence",
+    about: "A hybrid ML pipeline that models drug-distribution inefficiencies and pricing anomalies across regional markets.",
+    problem: "Supply-chain data alone misses how drugs, regions and distributors are connected.",
+    stack: ["Python 3.11", "XGBoost", "scikit-learn", "NetworkX", "SHAP", "Knowledge graphs"],
+    screens: [],
+    highlights: [
+      "18 tabular supply-chain features plus 22 knowledge-graph features",
+      "XGBoost R² 0.8916, beating the 0.8502 baseline",
+      "MAE 0.0320 · RMSE 0.0400",
+      "SHAP explainability for the drivers of demand clustering",
+      "Finalist at SAP MBA Hackfest",
+    ],
+    link: "https://github.com/Somyaaaaa23/PharmaDrishti",
   },
 ];
 

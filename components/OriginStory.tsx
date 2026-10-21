@@ -1,110 +1,98 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { ArrowDown, ArrowDownRight, ArrowRight, Asterisk, MousePointer2, Sparkles } from "lucide-react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useEffect, useState } from "react";
+import { ArrowDown, ArrowRight } from "lucide-react";
 import { Navigation } from "@/components/Navigation";
-import { WorldMap } from "@/components/WorldMap";
-import { DetailPanel } from "@/components/DetailPanel";
+import { OfferingTabs } from "@/components/OfferingTabs";
+import { ProjectDrawer } from "@/components/ProjectDrawer";
 import { RecruiterPanel } from "@/components/RecruiterPanel";
-import { contact, type WorldId } from "@/data/world";
-
-if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
+import { BinderClip, ChromeStar, DoodleArt, PaperClip, ScriptPaper } from "@/components/Decor";
+import { contact } from "@/data/world";
 
 export default function OriginStory() {
-  const [activeNode, setActiveNode] = useState<WorldId | null>(null);
+  const [openOffering, setOpenOffering] = useState<string | null>("experience");
+  const [openProject, setOpenProject] = useState<string | null>("graphsentinel");
   const [recruiterOpen, setRecruiterOpen] = useState(false);
-  const introRef = useRef<HTMLElement>(null);
-  const mapRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.fromTo(".hero-reveal", { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, stagger: 0.12, ease: "power3.out" });
-      gsap.fromTo(".intro-reveal", { y: 24, opacity: 0 }, {
-        y: 0, opacity: 1, duration: 0.8, stagger: 0.12, ease: "power3.out",
-        scrollTrigger: { trigger: introRef.current, start: "top 82%", once: true },
-      });
-      gsap.fromTo(".map-reveal", { y: 24, opacity: 0 }, {
-        y: 0, opacity: 1, duration: 0.7, stagger: 0.1, ease: "power2.out",
-        scrollTrigger: { trigger: mapRef.current, start: "top 78%", once: true },
-      });
-    });
-    return () => ctx.revert();
-  }, []);
-
-  useEffect(() => {
-    const anyDialogOpen = Boolean(activeNode || recruiterOpen);
-    document.body.classList.toggle("dialog-open", anyDialogOpen);
+    document.body.classList.toggle("dialog-open", recruiterOpen);
     const handleKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setActiveNode(null);
-        setRecruiterOpen(false);
-      }
+      if (event.key === "Escape") setRecruiterOpen(false);
     };
     window.addEventListener("keydown", handleKey);
     return () => {
       document.body.classList.remove("dialog-open");
       window.removeEventListener("keydown", handleKey);
     };
-  }, [activeNode, recruiterOpen]);
+  }, [recruiterOpen]);
 
-  const explore = () => mapRef.current?.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+  const toggleOffering = (id: string) => setOpenOffering((current) => (current === id ? null : id));
 
   return (
     <main id="home">
-      <Navigation onOpenRecruiter={() => setRecruiterOpen(true)} onExplore={explore} />
-      <section className="hero-section" aria-labelledby="hero-title">
-        <div className="hero-meta"><span><span className="live-dot" /> CURRENTLY IN THE MAKING</span><span>BIT MESRA, INDIA · 2026</span></div>
-        <div className="hero-copy">
-          <div className="hero-kicker hero-reveal"><span className="scribble-star"><Asterisk size={20} /></span> A DEVELOPER’S FIELD NOTES</div>
-          <h1 id="hero-title" className="hero-title hero-reveal">I didn’t start<br />with a <span className="scribble-word">master plan<span className="scribble-underline" /></span><span className="hero-period">.</span></h1>
-          <p className="hero-subtitle hero-reveal">I started by <span>building.</span></p>
-          <p className="hero-description hero-reveal">A computer science student at BIT Mesra, figuring things out by making things real. Software, AI/ML, research, and the occasional idea that refuses to stay in a notebook.</p>
-          <div className="hero-actions hero-reveal"><button className="button-primary" onClick={explore}>Explore my world <ArrowDownRight size={18} /></button><button className="button-text" onClick={() => setRecruiterOpen(true)}>The 30-second version <ArrowRight size={16} /></button></div>
-          <div className="hero-footnote hero-reveal"><span className="footnote-line" /> No perfect origin story. Just a lot of trying.</div>
-        </div>
-        <div className="hero-art" aria-hidden="true">
-          <div className="art-paper art-paper-back" />
-          <div className="art-paper art-paper-front">
-            <div className="art-paper-top"><span>NOTES TO SELF</span><span>NO. 001</span></div>
-            <div className="art-doodle"><svg viewBox="0 0 280 240" role="img" aria-label="Decorative hand-drawn path"><path d="M31 173 C10 115 68 74 112 105 S172 178 204 122 S238 70 254 80" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeDasharray="5 9"/><path d="M39 62 C65 23 119 28 130 67 C142 110 83 124 69 87 C58 58 98 44 115 68" fill="none" stroke="#3157D5" strokeWidth="4" strokeLinecap="round"/><path d="M204 145 l9 20 22 -2 -16 15 5 22 -19 -12 -19 12 6 -22 -17 -15 22 2z" fill="#F05A36"/><circle cx="54" cy="190" r="9" fill="#F4D86A"/><path d="M170 37 l8 15 17 2 -13 12 4 17 -16 -9 -15 9 3 -17 -12 -12 17 -2z" fill="#657B54"/><path d="M95 162 q19 -17 36 0 q-18 18 -36 0z" fill="#3157D5"/><circle cx="110" cy="162" r="4" fill="#F5F0E6"/></svg></div>
-            <div className="art-caption">follow the interesting<br />questions <span>↗</span></div>
-            <div className="art-stamp">STILL<br />LEARNING</div>
+      <Navigation onOpenRecruiter={() => setRecruiterOpen(true)} />
+
+      <section className="hero" aria-labelledby="hero-title">
+        <div className="hero-meta"><span className="eyebrow">A DEVELOPER’S FIELD NOTES</span><span className="eyebrow">BIT MESRA · 2023–2027</span></div>
+        <div className="hero-grid">
+          <div className="hero-copy">
+            <h1 id="hero-title" className="display hero-title">I didn’t start with a master plan.</h1>
+            <p className="script hero-script">I started by building.</p>
+            <p className="hero-description">A computer science student at BIT Mesra, figuring things out by making things real. Software, AI/ML, research, and the occasional idea that refuses to stay in a notebook.</p>
+            <div className="hero-actions">
+              <a className="btn btn-ink" href="#offering">Open my files <ArrowDown size={16} /></a>
+              <button type="button" className="btn btn-outline" onClick={() => setRecruiterOpen(true)}>The 30-second version <ArrowRight size={16} /></button>
+            </div>
           </div>
-          <div className="floating-note note-a"><Sparkles size={15} /> build, break, learn</div>
-          <div className="floating-note note-b"><span className="note-dot" /> curiosity is a feature</div>
-          <div className="art-index">FIG. 01 — A WORK IN PROGRESS</div>
+          <div className="hero-collage" aria-hidden="true">
+            <ScriptPaper className="collage-script">build, break, learn, and build again. follow the interesting questions. ship it, then make it better. build, break, learn.</ScriptPaper>
+            <figure className="polaroid collage-polaroid">
+              <div className="polaroid-art"><DoodleArt /></div>
+              <figcaption className="polaroid-caption">follow the interesting questions ↗</figcaption>
+            </figure>
+            <PaperClip className="collage-clip" />
+            <div className="collage-note paper-shadow">
+              <div className="torn lined"><p>notes to self:<br />1. build it<br />2. break it<br />3. learn, repeat</p></div>
+            </div>
+            <BinderClip className="collage-binder" hole="#FFFCF8" />
+            <ChromeStar className="collage-star" />
+          </div>
         </div>
-        <div className="hero-bottom"><span>SCROLL A LITTLE. WANDER A LOT.</span><span className="scroll-cue"><ArrowDown size={15} /></span><span>01 / THE BEGINNING</span></div>
       </section>
 
-      <section className="manifesto-section" ref={introRef} aria-labelledby="manifesto-title">
-        <div className="section-label intro-reveal"><span>01 / THE BACKSTORY</span><span>NOT A STRAIGHT LINE ↘</span></div>
-        <div className="manifesto-grid">
-          <h2 id="manifesto-title" className="manifesto-title intro-reveal">Somewhere between <span className="blue-underline">curiosity</span> and <span className="orange-highlight">shipping it</span>, I found my thing.</h2>
-          <div className="manifesto-copy intro-reveal"><p>I study computer science, but the work I remember most starts with a question: could this be useful? Could this be clearer? Could I make it work?</p><p>That question has taken me from building products to experimenting with machine learning, exploring research, competing in hackathons, and helping connect students with opportunities.</p><p className="hand-note">This map is the messy, useful middle. <span>↙</span></p></div>
+      <section className="section section-pink offering" id="offering" aria-labelledby="offer-title">
+        <div className="section-head">
+          <h2 id="offer-title" className="display section-title">the little things I offer</h2>
+          <p className="eyebrow">CURATED BY SOMYA · PULL A TAB TO OPEN ITS NOTES</p>
         </div>
-        <div className="margin-doodle" aria-hidden="true">✳</div>
+        <OfferingTabs openId={openOffering} onToggle={toggleOffering} />
       </section>
 
-      <section className="world-section" ref={mapRef} id="explore" aria-labelledby="world-title">
-        <div className="section-label map-reveal"><span>02 / PICK A PATH</span><span>NO WRONG TURN</span></div>
-        <div className="world-heading map-reveal"><div><p className="eyebrow">WELCOME TO THE WORK IN PROGRESS</p><h2 id="world-title">A little world<br />of <span>what I do.</span></h2></div><p className="world-instruction"><MousePointer2 size={18} /> Click a destination.<br />Follow whatever interests you.</p></div>
-        <WorldMap activeNode={activeNode} onSelect={setActiveNode} />
-        <p className="world-mobile-hint">Tap any destination to open its field notes.</p>
+      <section className="section section-white projects" id="projects" aria-labelledby="projects-title">
+        <div className="drawer-head">
+          <div>
+            <p className="eyebrow">FILED UNDER: THINGS I’VE MADE</p>
+            <h2 id="projects-title" className="display section-title">the project drawer</h2>
+          </div>
+          <p className="hand drawer-hint">pick a file, it opens like a book →</p>
+        </div>
+        <ProjectDrawer openId={openProject} onOpen={setOpenProject} />
       </section>
 
-      <section className="contact-section" id="contact" aria-labelledby="contact-title">
-        <div className="contact-doodle" aria-hidden="true">↗</div>
-        <p className="eyebrow">03 / YOUR TURN</p>
-        <h2 id="contact-title">Got an interesting<br />problem? <span>I’m listening.</span></h2>
+      <section className="section section-pink contact" id="contact" aria-labelledby="contact-title">
+        <p className="eyebrow">YOUR TURN</p>
+        <h2 id="contact-title" className="display">Got an interesting problem?</h2>
+        <p className="script contact-script">I’m listening.</p>
         <p className="contact-copy">I’m interested in software engineering, applied AI/ML, research, and people who enjoy making useful things.</p>
-        <div className="contact-actions"><a className="button-primary" href={`mailto:${contact.email}`}>Let’s talk <ArrowDownRight size={18} /></a><button className="button-text" onClick={() => setRecruiterOpen(true)}>Open recruiter view <ArrowRight size={16} /></button></div>
-        <div className="contact-footer"><span>MADE WITH CURIOSITY, NOT A TEMPLATE.</span><span>SOMYA UPADHYAY © 2026</span><a href="#home">BACK TO THE TOP ↑</a></div>
+        <div className="contact-actions">
+          <a className="btn btn-ink" href={`mailto:${contact.email}`}>{contact.email}</a>
+          <a className="btn btn-outline" href={contact.linkedin} target="_blank" rel="noreferrer">LinkedIn ↗</a>
+          <a className="btn btn-outline" href={contact.github} target="_blank" rel="noreferrer">GitHub ↗</a>
+          <button type="button" className="btn btn-outline" onClick={() => setRecruiterOpen(true)}>Open recruiter view</button>
+        </div>
+        <div className="site-footer"><span>MADE WITH CURIOSITY, NOT A TEMPLATE</span><span>SOMYA UPADHYAY © 2026</span><a href="#home">BACK TO THE TOP ↑</a></div>
       </section>
 
-      <DetailPanel activeNode={activeNode} onClose={() => setActiveNode(null)} />
       <RecruiterPanel open={recruiterOpen} onClose={() => setRecruiterOpen(false)} />
     </main>
   );

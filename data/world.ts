@@ -51,6 +51,7 @@ export const offerings: Offering[] = [
     facts: [
       "GraphSentinel · real-time AML fraud detection with Temporal GNNs, 0.89 F1",
       "PharmaDrishti · pharma supply-chain intelligence with XGBoost and knowledge graphs, R² 0.89",
+      "SanchaarSetu · AI-assisted interoperability layer for Karnataka's Single Window System, ₹1,00,000 winner at AI FOR BHARAT",
       "SaviHer · women-safety product",
     ],
     links: [{ label: "Open the project drawer", href: "#projects" }],
@@ -67,6 +68,7 @@ export const offerings: Offering[] = [
     facts: [
       "“Explainable Drug Adoption Forecasting using Knowledge Graphs” · accepted at IDBA 2026 (Springer LAIS series)",
       "“The Idiographic Shift in Computational Psychiatry” · selected for presentation at ICBAI 2026, IIM Bangalore",
+      "SanchaarSetu · submitted to ANTIC-2026 (IIIT Lucknow, Springer CCIS)",
       "Interested in explainable ML, knowledge graphs and graph learning",
     ],
   },
@@ -80,7 +82,7 @@ export const offerings: Offering[] = [
     title: "Wins & challenges",
     line: "short deadlines, clear ideas, keep moving",
     facts: [
-      "AI FOR BHARAT (PAN-IIT) · theme winner and ₹1,00,000 prize for SaanchaarSetu, middleware linking Karnataka's SWS to 40+ departments",
+      "AI FOR BHARAT (PAN-IIT) · theme winner and ₹1,00,000 prize for SanchaarSetu, an interoperability layer for Karnataka's Single Window System",
       "iDEA Hackathon 2.0 (Union Bank) · Top 40 of 1600+ teams with GraphSentinel",
       "Women Who Master (Aspire For Her × Logitech) · zonal finalist, top 3.1%",
       "SAP MBA Hackfest · finalist with PharmaDrishti",
@@ -123,7 +125,8 @@ export const offerings: Offering[] = [
   },
 ];
 
-export type ProjectScreen = { src: string; caption: string };
+// Screenshots are app captures cropped to the app window (no browser bar).
+export type ProjectScreen = { src: string; caption: string; width: number; height: number };
 
 export type Project = {
   id: string;
@@ -167,7 +170,11 @@ export const projects: Project[] = [
     about: "A real-time banking fraud detection system that catches multi-hop money-laundering patterns as they happen.",
     problem: "Threshold-based AML rules flag too many innocent transactions and miss layered laundering across accounts.",
     stack: ["PyTorch Geometric", "Neo4j", "Kafka", "Flink", "Docker", "Kubernetes"],
-    screens: [],
+    screens: [
+      { src: "/projects/graphsentinel-dashboard.jpg", caption: "command center: live transactions and fraud alerts", width: 1600, height: 852 },
+      { src: "/projects/graphsentinel-fund-flow.jpg", caption: "fund flow graph tracing suspicious money paths", width: 1600, height: 852 },
+      { src: "/projects/graphsentinel-federated.jpg", caption: "federated learning across a 26-bank network", width: 1600, height: 852 },
+    ],
     highlights: [
       "Temporal GNNs (EvolveGCN) plus LSTM autoencoders",
       "0.89 F1-score for fraud classification",
@@ -197,6 +204,32 @@ export const projects: Project[] = [
       "Finalist at SAP MBA Hackfest",
     ],
     link: "https://github.com/Somyaaaaa23/PharmaDrishti",
+  },
+  {
+    id: "sanchaarsetu",
+    no: "04",
+    year: "2026",
+    script: "Sanchaar",
+    bold: "SETU",
+    name: "SanchaarSetu",
+    tag: "Government interoperability layer",
+    about: "An AI-assisted interoperability layer that keeps Karnataka's Single Window System and department systems in sync, without changing the department systems. सञ्चार (communication) + सेतु (bridge).",
+    problem: "When a business updates its address, signatory or GSTIN on the Single Window System, each department still holds its own copy in its own schema, so records drift apart. 12.1% of businesses with more than one trade licence have different details across their filings.",
+    stack: ["FastAPI", "Redpanda (Kafka)", "Redis", "PostgreSQL", "sentence-transformers", "React + TypeScript", "Docker"],
+    screens: [
+      { src: "/projects/sanchaarsetu-event-feed.jpg", caption: "live event feed: every update, its route and its retries", width: 1600, height: 906 },
+      { src: "/projects/sanchaarsetu-conflicts.jpg", caption: "conflict resolver with per-field policies", width: 1600, height: 906 },
+      { src: "/projects/sanchaarsetu-departments.jpg", caption: "department systems across webhook, polling and snapshot tiers", width: 1600, height: 906 },
+    ],
+    highlights: [
+      "Theme winner and ₹1,00,000 prize at AI FOR BHARAT (PAN-IIT)",
+      "Research paper submitted to ANTIC-2026 (IIIT Lucknow, Springer CCIS)",
+      "Every update delivered exactly once: 0 duplicates and 0 lost across 2,000+ deliveries, even with a department offline",
+      "One department failing doesn't slow the others: 13 ms p95 latency for the rest",
+      "Multilingual embedding model maps fields across schemas with 1.00 precision at the auto-apply threshold",
+      "137 / 137 real conflicts caught, and 12,846 hash-chained audit entries verified intact",
+    ],
+    link: "https://github.com/SagarAgarwal2/Sanchaarsetu1",
   },
 ];
 

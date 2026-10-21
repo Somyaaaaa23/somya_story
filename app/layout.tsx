@@ -1,11 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import { Caveat, Instrument_Serif, Inter_Tight, Pinyon_Script } from "next/font/google";
+import { Gloock, Instrument_Serif, Inter_Tight, Pinyon_Script } from "next/font/google";
 import "./globals.css";
 
 const display = Instrument_Serif({ subsets: ["latin"], weight: "400", variable: "--font-display", display: "swap" });
 const script = Pinyon_Script({ subsets: ["latin"], weight: "400", variable: "--font-script", display: "swap" });
 const sans = Inter_Tight({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
-const hand = Caveat({ subsets: ["latin"], variable: "--font-hand", display: "swap" });
+const hand = Gloock({ subsets: ["latin"], weight: "400", variable: "--font-hand", display: "swap" });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
 

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import type { Project } from "@/data/world";
 import { PaperClip, StarBullet } from "@/components/Decor";
@@ -8,7 +9,6 @@ type PageId = "about" | "screens" | "highlights";
 
 const PAGE_LABELS: Record<PageId, string> = { about: "WHAT IT IS", screens: "SCREENS", highlights: "HIGHLIGHTS" };
 const PAGE_NUMBERS = ["ONE", "TWO", "THREE"];
-const TILTS = ["-2deg", "1.5deg", "-1deg"];
 
 type ProjectBookProps = { project: Project; onClose: () => void };
 
@@ -18,6 +18,7 @@ export function ProjectBook({ project, onClose }: ProjectBookProps) {
   if (project.highlights.length) pages.push("highlights");
 
   const [index, setIndex] = useState(0);
+  const [shot, setShot] = useState(0);
   const current = pages[index];
   const cover = project.screens[0];
 
@@ -35,8 +36,7 @@ export function ProjectBook({ project, onClose }: ProjectBookProps) {
         </div>
         {cover ? (
           <figure className="polaroid book-polaroid">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={cover.src} alt={cover.caption} />
+            <Image src={cover.src} alt={cover.caption} width={cover.width} height={cover.height} sizes="300px" />
             <figcaption className="polaroid-caption">{cover.caption}</figcaption>
             <PaperClip className="book-clip" />
           </figure>
@@ -81,15 +81,21 @@ export function ProjectBook({ project, onClose }: ProjectBookProps) {
             {current === "screens" && (
               <>
                 <h3>Screens</h3>
-                <div className="screens">
-                  {project.screens.map((screen, i) => (
-                    <figure className="screen" key={screen.src} style={{ rotate: TILTS[i % TILTS.length] }}>
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={screen.src} alt={screen.caption} />
-                      <figcaption className="polaroid-caption">{screen.caption}</figcaption>
-                    </figure>
-                  ))}
-                </div>
+                <figure className="screen-main">
+                  <a href={project.screens[shot].src} target="_blank" rel="noreferrer" aria-label={`Open full-size screenshot: ${project.screens[shot].caption}`}>
+                    <Image src={project.screens[shot].src} alt={project.screens[shot].caption} width={project.screens[shot].width} height={project.screens[shot].height} sizes="(max-width: 760px) 90vw, 620px" />
+                  </a>
+                  <figcaption className="polaroid-caption">{project.screens[shot].caption}</figcaption>
+                </figure>
+                {project.screens.length > 1 && (
+                  <div className="screen-thumbs">
+                    {project.screens.map((screen, i) => (
+                      <button key={screen.src} type="button" className="screen-thumb" aria-pressed={i === shot} aria-label={`Show screen: ${screen.caption}`} onClick={() => setShot(i)}>
+                        <Image src={screen.src} alt="" width={screen.width} height={screen.height} sizes="120px" />
+                      </button>
+                    ))}
+                  </div>
+                )}
               </>
             )}
             {current === "highlights" && (

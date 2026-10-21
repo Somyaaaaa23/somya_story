@@ -57,17 +57,3 @@ export function ScriptPaper({ className, children }: DecorProps & { children: st
     </div>
   );
 }
-
-export function DoodleArt() {
-  return (
-    <svg viewBox="0 0 280 240" aria-hidden="true">
-      <path d="M31 173 C10 115 68 74 112 105 S172 178 204 122 S238 70 254 80" fill="none" stroke="#141414" strokeWidth="3" strokeLinecap="round" strokeDasharray="5 9" />
-      <path d="M39 62 C65 23 119 28 130 67 C142 110 83 124 69 87 C58 58 98 44 115 68" fill="none" stroke="#8E2621" strokeWidth="4" strokeLinecap="round" />
-      <path d="M204 145 l9 20 22 -2 -16 15 5 22 -19 -12 -19 12 6 -22 -17 -15 22 2z" fill="#E9AFC0" />
-      <circle cx="54" cy="190" r="9" fill="#C4BD55" />
-      <path d="M170 37 l8 15 17 2 -13 12 4 17 -16 -9 -15 9 3 -17 -12 -12 17 -2z" fill="#C6A0B1" />
-      <path d="M95 162 q19 -17 36 0 q-18 18 -36 0z" fill="#141414" />
-      <circle cx="110" cy="162" r="4" fill="#FFFCF8" />
-    </svg>
-  );
-}

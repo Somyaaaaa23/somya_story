@@ -6,7 +6,8 @@ import { Navigation } from "@/components/Navigation";
 import { OfferingTabs } from "@/components/OfferingTabs";
 import { ProjectDrawer } from "@/components/ProjectDrawer";
 import { RecruiterPanel } from "@/components/RecruiterPanel";
-import { BinderClip, ChromeStar, DoodleArt, PaperClip, ScriptPaper } from "@/components/Decor";
+import Image from "next/image";
+import { BinderClip, ChromeStar, ScriptPaper } from "@/components/Decor";
 import { contact } from "@/data/world";
 
 export default function OriginStory() {
@@ -44,18 +45,18 @@ export default function OriginStory() {
               <button type="button" className="btn btn-outline" onClick={() => setRecruiterOpen(true)}>The 30-second version <ArrowRight size={16} /></button>
             </div>
           </div>
-          <div className="hero-collage" aria-hidden="true">
+          <div className="hero-collage">
             <ScriptPaper className="collage-script">build, break, learn, and build again. follow the interesting questions. ship it, then make it better. build, break, learn.</ScriptPaper>
-            <figure className="polaroid collage-polaroid">
-              <div className="polaroid-art"><DoodleArt /></div>
-              <figcaption className="polaroid-caption">follow the interesting questions ↗</figcaption>
-            </figure>
-            <PaperClip className="collage-clip" />
-            <div className="collage-note paper-shadow">
+            <div className="collage-note paper-shadow" aria-hidden="true">
               <div className="torn lined"><p>notes to self:<br />1. build it<br />2. break it<br />3. learn, repeat</p></div>
             </div>
             <BinderClip className="collage-binder" hole="#FFFCF8" />
             <ChromeStar className="collage-star" />
+            <div className="collage-sticker">
+              <Image src="/somya-cutout.png" alt="Somya Upadhyay, smiling, in a black blazer" width={700} height={1124} priority sizes="(max-width: 760px) 260px, 320px" />
+              <p className="sticker-label" aria-hidden="true">hi, that’s me!</p>
+              <svg className="sticker-arrow" viewBox="0 0 90 60" fill="none" aria-hidden="true"><path d="M4 12c18-8 34 0 40 14s20 22 40 18" stroke="#8E2621" strokeWidth="2.6" strokeLinecap="round" /><path d="M72 36l12 8-13 6" stroke="#8E2621" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
+            </div>
           </div>
         </div>
       </section>

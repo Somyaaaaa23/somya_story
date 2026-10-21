@@ -12,6 +12,9 @@ const PAGE_NUMBERS = ["ONE", "TWO", "THREE"];
 
 type ProjectBookProps = { project: Project; onClose: () => void };
 
+// Phone screenshots are portrait; they get a narrower frame than desktop captures.
+const isPhone = (screen: { width: number; height: number }) => screen.height > screen.width;
+
 export function ProjectBook({ project, onClose }: ProjectBookProps) {
   const pages: PageId[] = ["about"];
   if (project.screens.length) pages.push("screens");
@@ -35,7 +38,7 @@ export function ProjectBook({ project, onClose }: ProjectBookProps) {
           <p className="book-tag">{project.tag}</p>
         </div>
         {cover ? (
-          <figure className="polaroid book-polaroid">
+          <figure className={`polaroid book-polaroid ${isPhone(cover) ? "is-phone" : ""}`}>
             <Image src={cover.src} alt={cover.caption} width={cover.width} height={cover.height} sizes="300px" />
             <figcaption className="polaroid-caption">{cover.caption}</figcaption>
             <PaperClip className="book-clip" />
@@ -81,14 +84,14 @@ export function ProjectBook({ project, onClose }: ProjectBookProps) {
             {current === "screens" && (
               <>
                 <h3>Screens</h3>
-                <figure className="screen-main">
+                <figure className={`screen-main ${isPhone(project.screens[shot]) ? "is-phone" : ""}`}>
                   <a href={project.screens[shot].src} target="_blank" rel="noreferrer" aria-label={`Open full-size screenshot: ${project.screens[shot].caption}`}>
-                    <Image src={project.screens[shot].src} alt={project.screens[shot].caption} width={project.screens[shot].width} height={project.screens[shot].height} sizes="(max-width: 760px) 90vw, 620px" />
+                    <Image src={project.screens[shot].src} alt={project.screens[shot].caption} width={project.screens[shot].width} height={project.screens[shot].height} sizes={isPhone(project.screens[shot]) ? "280px" : "(max-width: 760px) 90vw, 620px"} />
                   </a>
                   <figcaption className="polaroid-caption">{project.screens[shot].caption}</figcaption>
                 </figure>
                 {project.screens.length > 1 && (
-                  <div className="screen-thumbs">
+                  <div className={`screen-thumbs ${project.screens.every(isPhone) ? "is-phone" : ""}`}>
                     {project.screens.map((screen, i) => (
                       <button key={screen.src} type="button" className="screen-thumb" aria-pressed={i === shot} aria-label={`Show screen: ${screen.caption}`} onClick={() => setShot(i)}>
                         <Image src={screen.src} alt="" width={screen.width} height={screen.height} sizes="120px" />

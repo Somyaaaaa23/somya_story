@@ -53,7 +53,7 @@ export const offerings: Offering[] = [
       "PharmaDrishti · pharma supply-chain intelligence with XGBoost and knowledge graphs, R² 0.89",
       "SanchaarSetu · AI-assisted interoperability layer for Karnataka's Single Window System, ₹1,00,000 winner at AI FOR BHARAT",
       "Agentic RFP · four AI agents that answer paint-industry tenders in about 7 seconds, built for a hackathon",
-      "SaviHer · women-safety product",
+      "SaviHer · Flutter app for women's safety, with real-time tracking and emergency contacts",
     ],
     links: [{ label: "Open the project drawer", href: "#projects" }],
   },
@@ -150,15 +150,22 @@ export const projects: Project[] = [
   {
     id: "saviher",
     no: "01",
-    year: "2026",
+    year: "2024",
     script: "Savi",
     bold: "HER",
     name: "SaviHer",
-    tag: "Women-safety product",
-    about: "A women-safety product. The full write-up for this file is on its way.",
-    stack: [],
+    tag: "Women-safety app",
+    about: "A Flutter app for women's safety and empowerment that brings safety tools, emergency contacts and support resources into one place.",
+    stack: ["Flutter", "Dart"],
     screens: [],
-    highlights: [],
+    highlights: [
+      "Real-time safety tracking",
+      "Emergency contact management",
+      "Community support network",
+      "Directory of support resources",
+      "Safety tips and guidelines",
+    ],
+    link: "https://github.com/Somyaaaaa23/Sheshield",
   },
   {
     id: "graphsentinel",
@@ -230,7 +237,7 @@ export const projects: Project[] = [
       "Multilingual embedding model maps fields across schemas with 1.00 precision at the auto-apply threshold",
       "137 / 137 real conflicts caught, and 12,846 hash-chained audit entries verified intact",
     ],
-    link: "https://github.com/SagarAgarwal2/Sanchaarsetu1",
+    link: "https://github.com/Somyaaaaa23/SanchaarSetu",
   },
   {
     id: "agentic-rfp",
@@ -257,6 +264,7 @@ export const projects: Project[] = [
       "Learning memory recalls similar past RFPs, and low-confidence decisions are flagged for human review",
       "PDF and CSV reports, with support for 9 currencies",
     ],
+    link: "https://github.com/Somyaaaaa23/RFP_PAINTS",
   },
 ];
 

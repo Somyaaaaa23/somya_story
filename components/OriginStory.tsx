@@ -64,7 +64,7 @@ export default function OriginStory() {
       <section className="section section-pink offering" id="offering" aria-labelledby="offer-title">
         <div className="section-head">
           <h2 id="offer-title" className="display section-title">the little things I offer</h2>
-          <p className="eyebrow">CURATED BY SOMYA · PULL A TAB TO OPEN ITS NOTES</p>
+          <p className="eyebrow">CURATED BY SOMYA · PICK A FOLDER TO OPEN ITS NOTES</p>
         </div>
         <OfferingTabs openId={openOffering} onToggle={toggleOffering} />
       </section>

@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Gloock, Instrument_Serif, Inter_Tight, Pinyon_Script } from "next/font/google";
 import "./globals.css";
 
-const display = Instrument_Serif({ subsets: ["latin"], weight: "400", variable: "--font-display", display: "swap" });
+const display = Instrument_Serif({ subsets: ["latin"], weight: "400", style: ["normal", "italic"], variable: "--font-display", display: "swap" });
 const script = Pinyon_Script({ subsets: ["latin"], weight: "400", variable: "--font-script", display: "swap" });
 const sans = Inter_Tight({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
 const hand = Gloock({ subsets: ["latin"], weight: "400", variable: "--font-hand", display: "swap" });

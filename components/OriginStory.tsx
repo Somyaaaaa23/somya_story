@@ -6,6 +6,7 @@ import { Navigation } from "@/components/Navigation";
 import { OfferingTabs } from "@/components/OfferingTabs";
 import { ProjectDrawer } from "@/components/ProjectDrawer";
 import { RecruiterPanel } from "@/components/RecruiterPanel";
+import { CursorLab } from "@/components/CursorLab";
 import Image from "next/image";
 import { BinderClip, ChromeStar, ScriptPaper } from "@/components/Decor";
 import { contact } from "@/data/world";
@@ -95,6 +96,7 @@ export default function OriginStory() {
       </section>
 
       <RecruiterPanel open={recruiterOpen} onClose={() => setRecruiterOpen(false)} />
+      <CursorLab />
     </main>
   );
 }
